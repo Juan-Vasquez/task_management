@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Responses\TokenResponse;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class RegisterController extends Controller
 {
@@ -25,14 +27,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->input('password'))
         ]);
 
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+        $token = JWTAuth::fromUser($user);
+
+        return new TokenResponse($token, 201);
         
     }
-
-
-
 
 }
