@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Register;
+namespace Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterUserTest extends TestCase
 {
@@ -27,6 +27,8 @@ class RegisterUserTest extends TestCase
             'name' => 'Juan Vasquez',
             'email' => 'avasquez@test.com',
         ]);
+
+        $response->assertSuccessful();
 
         $this->assertTrue(JWTAuth::setToken($response->json('access_token'))->check());
     }
