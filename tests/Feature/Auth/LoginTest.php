@@ -26,6 +26,8 @@ class LoginTest extends TestCase
 
         $response->assertOk();
 
+        $response->assertJsonStructure(['access_token', 'token_type', 'expires_in']);
+
         $this->assertTrue(JWTAuth::setToken($response->json('access_token'))->check());
     }
 
