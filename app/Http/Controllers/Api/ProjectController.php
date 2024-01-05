@@ -9,6 +9,18 @@ use App\Http\Resources\ProjectResource;
 
 class ProjectController extends Controller
 {
+
+    public function index()
+    {
+        $projects = Project::all();
+
+        return ProjectResource::collection($projects);
+    }
+
+    public function show(Project $project)
+    {
+        return ProjectResource::make($project);
+    }
     
     public function store(Request $request)
     {
