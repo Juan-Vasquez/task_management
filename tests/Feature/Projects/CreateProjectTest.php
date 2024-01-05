@@ -24,7 +24,7 @@ class CreateProjectTest extends TestCase
             'description' => 'Esta es mi primera descripcion',
             'user_id' => $user->id
         ], [
-            'authorization' => $token
+            'authorization' => "Bearer {$token}"
         ]);
 
         $response->assertSuccessful();
@@ -50,7 +50,7 @@ class CreateProjectTest extends TestCase
             'description' => 'Esta es mi primera descripcion',
             'user_id' => $user->id
         ], [
-            'authorization' => $token
+            'authorization' => "Bearer {$token}"
         ])->assertJsonValidationErrorFor('title');
         
     }
@@ -66,7 +66,7 @@ class CreateProjectTest extends TestCase
             'title' => 'Mi primer proyecto',
             'user_id' => $user->id
         ], [
-            'authorization' => $token
+            'authorization' => "Bearer {$token}"
         ])->assertJsonValidationErrorFor('description');
         
     }
@@ -82,7 +82,7 @@ class CreateProjectTest extends TestCase
             'title' => 'Mi primer proyecto',
             'description' => 'Esta es mi primera descripcion'
         ], [
-            'authorization' => $token
+            'authorization' => "Bearer {$token}"
         ])->assertJsonValidationErrorFor('user_id');
         
     }
