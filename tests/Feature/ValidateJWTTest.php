@@ -129,7 +129,7 @@ class ValidateJWTTest extends TestCase
             'accept' => 'application/json',
             'content-type' => 'application/json',
             'authorization' => "Bearer DSDFS$bearer_token"
-        ])->dump();
+        ]);
         
         $response->assertStatus(401);
 
@@ -159,11 +159,11 @@ class ValidateJWTTest extends TestCase
 
         sleep(1);
 
-        $this->get('route_test', [
+        $response = $this->get('route_test', [
             'accept' => 'application/json',
             'content-type' => 'application/json',
             'authorization' => "Bearer {$bearer_token}"
-        ])->dump();
+        ]);
         
         $response->assertStatus(401);
 
