@@ -6,23 +6,24 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProjectController extends Controller
 {
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $projects = Project::all();
 
         return ProjectResource::collection($projects);
     }
 
-    public function show(Project $project)
+    public function show(Project $project): ProjectResource
     {
         return ProjectResource::make($project);
     }
     
-    public function store(Request $request)
+    public function store(Request $request): ProjectResource
     {
         $request->validate([
             'title' => ['required'],
