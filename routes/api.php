@@ -25,6 +25,7 @@ Route::middleware('jwt')->group(function(){
     Route::get('projects', [ProjectController::class, 'index'])->name('api.v1.projects.index');
     Route::get('projects/{project}', [ProjectController::class, 'show'])->name('api.v1.projects.show');
     Route::post('projects', [ProjectController::class, 'store'])->name('api.v1.projects.store');
-
+    Route::patch('projects/{project}', [ProjectController::class, 'update'])->name('api.v1.projects.update');
+    Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('api.v1.projects.destroy');
 
 });

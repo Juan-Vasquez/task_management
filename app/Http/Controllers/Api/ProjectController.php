@@ -40,4 +40,28 @@ class ProjectController extends Controller
         return ProjectResource::make($project);
     }
 
+    public function update(Project $project, Request $request)
+    {
+        $request->validate([
+            'title' => ['required'],
+            'description' => ['required'],
+            'user_id' => ['required']
+        ]);
+
+        $project->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_id' => $request->input('user_id')
+        ]);
+
+        return ProjectResource::make($project);
+    }
+
+    public function destroy(Project $project)
+    {
+        $project->delete();
+
+        return response()->noContent();
+    }
+
 }

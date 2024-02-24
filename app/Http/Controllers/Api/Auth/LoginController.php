@@ -24,7 +24,7 @@ class LoginController extends Controller
             return new TokenResponse($token, 200);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['error' => 'Incorrect credentials'], 400);
 
     }
 
