@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::middleware('jwt')->group(function(){
     Route::post('projects', [ProjectController::class, 'store'])->name('api.v1.projects.store');
     Route::patch('projects/{project}', [ProjectController::class, 'update'])->name('api.v1.projects.update');
     Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('api.v1.projects.destroy');
+
+    Route::post('tasks', [TaskController::class, 'store'])->name('api.v1.tasks.store');
 
 });
