@@ -32,11 +32,4 @@ trait JsonApiResources
         return $collection;
     }
 
-    public function jsonPaginate(): Closure
-    {
-        return function(){
-            /** Builder $this */
-        };
-    }
-
 }

@@ -19,7 +19,7 @@ class TaskResource extends JsonResource
             'description' => $this->resource->description,
             'due_date' => $this->resource->due_date,
             'priority' => $this->resource->priority,
-            'completed' => $this->resource->completed,
+            'completed' => (boolean)$this->resource->completed,
             'project_id' => $this->resource->project_id
         ];
     }

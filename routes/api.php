@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\TaskController;
 Route::post('register', [RegisterController::class, 'register'])->name('api.v1.register');
 Route::post('login', [LoginController::class, 'login'])->name('api.v1.login');
 
-Route::middleware('jwt')->group(function(){
+Route::middleware(['jwt', 'headers.verified'])->group(function(){
 
     Route::get('projects', [ProjectController::class, 'index'])->name('api.v1.projects.index');
     Route::get('projects/{project}', [ProjectController::class, 'show'])->name('api.v1.projects.show');
@@ -29,6 +29,8 @@ Route::middleware('jwt')->group(function(){
     Route::patch('projects/{project}', [ProjectController::class, 'update'])->name('api.v1.projects.update');
     Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('api.v1.projects.destroy');
 
+    Route::get('tasks', [TaskController::class, 'index'])->name('api.v1.tasks.index');
     Route::post('tasks', [TaskController::class, 'store'])->name('api.v1.tasks.store');
+    Route::get('tasks/{task}', [TaskController::class, 'show'])->name('api.v1.tasks.show');
 
 });

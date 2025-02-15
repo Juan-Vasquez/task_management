@@ -20,7 +20,7 @@ class TaskFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(3, false),
-            'due_date' => $this->faker->time(),
+            'due_date' => $this->faker->date,
             'priority' => 'low',
             'completed' => $this->faker->boolean(),
             'project_id' => Project::factory()

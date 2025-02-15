@@ -5,63 +5,41 @@ namespace App\Http\Controllers\Api;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProjectResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use App\Service\ProjectService;
 
 class ProjectController extends Controller
 {
 
-    public function index(): AnonymousResourceCollection
-    {
-        $projects = Project::all();
+    private $projectService;
 
-        return ProjectResource::collection($projects);
+    public function __construct(ProjectService $projectService)
+    {
+        $this->projectService = $projectService;
     }
 
-    public function show(Project $project): ProjectResource
+    public function index()
     {
-        return ProjectResource::make($project);
+        return $this->projectService->index();
+    }
+
+    public function show($project)
+    {
+        return $this->projectService->show($project);
     }
     
-    public function store(Request $request): ProjectResource
+    public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
-            'user_id' => ['required']
-        ]);
-
-        $project = Project::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'user_id' => $request->input('user_id')
-        ]);
-
-        return ProjectResource::make($project);
+        return $this->projectService->store($request);
     }
 
     public function update(Project $project, Request $request)
     {
-        $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
-            'user_id' => ['required']
-        ]);
-
-        $project->update([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'user_id' => $request->input('user_id')
-        ]);
-
-        return ProjectResource::make($project);
+        return $this->projectService->update($project, $request);
     }
 
-    public function destroy(Project $project)
+    public function destroy($project)
     {
-        $project->delete();
-
-        return response()->noContent();
+        return $this->projectService->destroy($project);
     }
 
 }
